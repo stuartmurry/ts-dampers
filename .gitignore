@@ -8,5 +8,8 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+# To Do: Move some sensitive info from this file into a separate file
+src/main/java/com/thermalstrategies/eportal/manager/MailManager.java
+
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
