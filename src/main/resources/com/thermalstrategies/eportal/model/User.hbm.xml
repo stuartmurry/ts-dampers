@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 7, 2009 7:19:36 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="tstrat_damper" name="com.thermalstrategies.eportal.model.User" table="user">
+    <cache usage="read-write"/>
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="com.thermalstrategies.eportal.model.Customer" fetch="select" name="customer">
+      <column name="customer_id"/>
+    </many-to-one>
+    <many-to-one class="com.thermalstrategies.eportal.model.Role" fetch="select" name="role">
+      <column name="role_id" not-null="true"/>
+    </many-to-one>
+    <property name="userName" type="string">
+      <column length="100" name="user_name" unique="true"/>
+    </property>
+    <property name="customers" type="string">
+      <column name="customers"/>
+    </property>
+    <property name="password" type="string">
+      <column length="50" name="password"/>
+    </property>
+    <property name="email" type="string">
+      <column length="100" name="email" unique="true"/>
+    </property>
+    <property name="firstName" type="string">
+      <column length="50" name="first_name"/>
+    </property>
+    <property name="lastName" type="string">
+      <column length="50" name="last_name"/>
+    </property>
+    <property name="address1" type="string">
+      <column length="100" name="address1"/>
+    </property>
+    <property name="address2" type="string">
+      <column length="100" name="address2"/>
+    </property>
+    <property name="city" type="string">
+      <column length="50" name="city"/>
+    </property>
+    <property name="state" type="string">
+      <column length="50" name="state"/>
+    </property>
+    <property name="zip" type="string">
+      <column length="50" name="zip"/>
+    </property>
+    <property name="phone" type="string">
+      <column length="50" name="phone"/>
+    </property>
+    
+    <property name="includebuildingids" type="string">
+      <column length="255" name="includebuildingids"/>
+    </property>
+    
+    
+    <property name="dateCreatedTs" type="timestamp">
+      <column length="19" name="date_created_ts"/>
+    </property>
+    <property name="lastModifiedTs" type="timestamp">
+      <column length="19" name="last_modified_ts"/>
+    </property>
+    <property name="isenabled" type="boolean">
+      <column name="isenabled" not-null="true"/>
+    </property>
+    <property name="sessionId" type="string">
+      <column length="50" name="sessionId"/>
+    </property>
+    <set inverse="true" name="userlogs">
+      <key>
+        <column name="user_id"/>
+      </key>
+      <one-to-many class="com.thermalstrategies.eportal.model.Userlog"/>
+    </set>
+    <set inverse="true" name="dampertests">
+      <key>
+        <column name="tester"/>
+      </key>
+      <one-to-many class="com.thermalstrategies.eportal.model.Dampertest"/>
+    </set>
+    <set inverse="true" name="buildingfloors">
+      <key>
+        <column name="user_id"/>
+      </key>
+      <one-to-many class="com.thermalstrategies.eportal.model.Buildingfloor"/>
+    </set>
+  </class>
+</hibernate-mapping>

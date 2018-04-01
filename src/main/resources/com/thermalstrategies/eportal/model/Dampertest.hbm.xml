@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 7, 2009 7:19:36 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="tstrat_damper" name="com.thermalstrategies.eportal.model.Dampertest" table="dampertest">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="com.thermalstrategies.eportal.model.Customer" fetch="select" name="customer">
+      <column name="customer_id"/>
+    </many-to-one>
+    <many-to-one class="com.thermalstrategies.eportal.model.Dampertype" fetch="select" name="dampertype">
+      <column name="type_id"/>
+    </many-to-one>
+    <many-to-one class="com.thermalstrategies.eportal.model.Building" fetch="select" name="building">
+      <column name="building_id"/>
+    </many-to-one>
+    <many-to-one class="com.thermalstrategies.eportal.model.Dampermaterial" fetch="select" name="dampermaterial">
+      <column name="material_id"/>
+    </many-to-one>
+    <many-to-one class="com.thermalstrategies.eportal.model.Damperstatus" fetch="select" name="damperstatus">
+      <column name="status_id"/>
+    </many-to-one>
+    <many-to-one class="com.thermalstrategies.eportal.model.Buildingfloor" fetch="select" name="buildingfloor">
+      <column name="floor_id"/>
+    </many-to-one>
+    <many-to-one class="com.thermalstrategies.eportal.model.User" fetch="select" name="user">
+      <column name="tester"/>
+    </many-to-one>
+    <property name="aliasId" type="string">
+      <column length="100" name="alias_id"/>
+    </property>
+    <property name="sizel" type="java.lang.Integer">
+      <column name="sizel"/>
+    </property>
+    <property name="sizew" type="java.lang.Integer">
+      <column name="sizew"/>
+    </property>
+    <property name="system" type="string">
+      <column length="50" name="system"/>
+    </property>
+    <property name="systemtype" type="string">
+      <column length="100" name="systemtype"/>
+    </property>
+    <property name="location" type="string">
+      <column name="location"/>
+    </property>
+    <property name="sublocation" type="string">
+      <column name="sublocation"/>
+    </property>
+    <property name="dampernumber" type="java.lang.Integer">
+      <column name="dampernumber"/>
+    </property>
+    <property name="series" type="java.lang.Integer">
+      <column name="series"/>
+    </property>
+    <property name="dateTestedTs" type="date">
+      <column length="10" name="date_tested_ts"/>
+    </property>
+    <property name="repairDate" type="date">
+      <column length="10" name="repair_date"/>
+    </property>
+    <property name="comments" type="string">
+      <column name="comments"/>
+    </property>
+    <property name="specialProcedures" type="string">
+      <column name="special_procedures"/>
+    </property>
+    <property name="isenabled" type="boolean">
+      <column name="isenabled" not-null="true"/>
+    </property>
+    <property name="nextTestDate" type="date">
+      <column length="10" name="next_test_date"/>
+    </property>
+    <property name="occupancy" type="string">
+      <column length="50" name="occupancy"/>
+    </property>
+    <set inverse="true" name="repairhistories">
+      <key>
+        <column name="dampertest_id"/>
+      </key>
+      <one-to-many class="com.thermalstrategies.eportal.model.Repairhistory"/>
+    </set>
+  </class>
+</hibernate-mapping>

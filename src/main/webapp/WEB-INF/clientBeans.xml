@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <bean id="editFloorController" class="com.thermalstrategies.eportal.controller.client.EditFloorFormController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="clientController" class="com.thermalstrategies.eportal.controller.client.ClientController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="listClientController" class="com.thermalstrategies.eportal.controller.client.ListClientController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="editClientController" class="com.thermalstrategies.eportal.controller.client.EditClientController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="listBuildingFormController" class="com.thermalstrategies.eportal.controller.client.ListBuildingFormController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="editBuildingFormController" class="com.thermalstrategies.eportal.controller.client.EditBuildingFormController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="deleteClientController" class="com.thermalstrategies.eportal.controller.client.DeleteClientController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="deleteBuildingController" class="com.thermalstrategies.eportal.controller.client.DeleteBuildingController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="deleteFloorController" class="com.thermalstrategies.eportal.controller.client.DeleteFloorController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+</beans>

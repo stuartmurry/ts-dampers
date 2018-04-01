@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 7, 2009 7:19:36 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="tstrat_damper" lazy="false" name="com.thermalstrategies.eportal.model.Damperstatus" table="damperstatus">
+    <cache usage="read-only"/>
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="increment"/>
+    </id>
+    <property name="status" type="string">
+      <column length="50" name="status"/>
+    </property>
+    <property name="substatus" type="string">
+      <column length="50" name="substatus"/>
+    </property>
+    <property name="isenabled" type="boolean">
+      <column name="isenabled" not-null="true"/>
+    </property>
+    <set inverse="true" name="dampertests">
+      <key>
+        <column name="status_id"/>
+      </key>
+      <one-to-many class="com.thermalstrategies.eportal.model.Dampertest"/>
+    </set>
+  </class>
+</hibernate-mapping>

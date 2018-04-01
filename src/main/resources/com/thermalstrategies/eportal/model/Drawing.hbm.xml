@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 5, 2011 12:40:35 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="tstrat_damper" name="com.thermalstrategies.eportal.model.Drawing" table="drawing">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="increment"/>
+    </id>
+    <property name="drawingName" type="string">
+      <column name="drawing_name"/>
+    </property>
+    <property name="customerId" type="java.lang.Integer">
+      <column name="customer_id"/>
+    </property>
+    <property name="customerName" type="string">
+      <column name="customer_name"/>
+    </property>
+    <property name="buildingId" type="java.lang.Integer">
+      <column name="building_id"/>
+    </property>
+    <property name="buildingName" type="string">
+      <column name="building_name"/>
+    </property>
+    <property name="floorId" type="java.lang.Integer">
+      <column name="floor_id"/>
+    </property>
+    <property name="floorName" type="string">
+      <column name="floor_name"/>
+    </property>
+    <property name="drawingOriginal" type="binary">
+      <column name="drawing_original"/>
+    </property>
+    <property name="drawingThumb" type="binary">
+      <column name="drawing_thumb"/>
+    </property>
+    <property name="drawing" type="binary">
+      <column name="drawing"/>
+    </property>
+    <property name="damperId" type="java.lang.Integer">
+      <column name="damper_id"/>
+    </property>
+  </class>
+</hibernate-mapping>

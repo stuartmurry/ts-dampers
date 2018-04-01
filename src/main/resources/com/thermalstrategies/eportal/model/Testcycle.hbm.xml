@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 20, 2010 10:41:04 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="tstrat_damper" name="com.thermalstrategies.eportal.model.Testcycle" table="testcycle">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.thermalstrategies.eportal.model.Customer" fetch="select" name="customer">
+      <column name="customer_id"/>
+    </many-to-one>
+    <many-to-one class="com.thermalstrategies.eportal.model.Building" fetch="select" name="building">
+      <column name="building_id"/>
+    </many-to-one>
+    <property name="description" type="string">
+      <column name="description"/>
+    </property>
+    <property name="startdate" type="date">
+      <column length="10" name="startdate"/>
+    </property>
+    <property name="complete" type="java.lang.Boolean">
+      <column name="complete"/>
+    </property>
+    <property name="finishdate" type="date">
+      <column length="10" name="finishdate"/>
+    </property>
+  </class>
+</hibernate-mapping>

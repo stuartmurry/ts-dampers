@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<b:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:b="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.1.xsd">-->
+                        
+<!--<beans:bean xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.0.xsd">-->
+                    
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:s="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+                        
+
+    <!-- Hibernate Data Access Objects(Declared twice-needs to be fixed) - might be because of the namespace configuration <b:bean ... -->
+
+    <s:http auto-config="true">
+        
+        <s:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <s:intercept-url pattern="/forgottenpassword.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <s:intercept-url pattern="/ForgottenPassword" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <s:intercept-url pattern="/images/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <s:intercept-url pattern="/css/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <s:intercept-url pattern="/script/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <s:intercept-url pattern="/**" access="ROLE_USER"/>
+        <s:intercept-url pattern="/dwr/*" access="ROLE_USER"/>
+
+        <!-- All of this is unnecessary if auto-config="true" -->
+        <s:form-login login-page="/login.jsp" authentication-failure-url="/login.jsp?login_error=1" />
+        <!--anonymous /-->
+        <!--http-basic / -->
+        <s:logout logout-success-url="/login.jsp"/>
+        
+        <s:remember-me />
+        <!--servlet-api-integration /-->
+
+        <s:session-management>
+            <s:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
+        </s:session-management>
+        
+        
+    </s:http>
+    
+
+
+    <bean id="eportalUserDetailsService" class="com.thermalstrategies.eportal.security.EPortalUserDetailsService" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+   
+   <s:authentication-manager>
+       <s:authentication-provider user-service-ref='eportalUserDetailsService'/>
+   </s:authentication-manager>
+    
+
+</beans>
+

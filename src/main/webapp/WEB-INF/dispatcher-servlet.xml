@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+
+    <!-- (message.properties) -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <value>messages</value>
+        </property>
+    </bean>
+
+<!--    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">exception</prop>
+            </props>
+        </property>
+    </bean>-->
+
+    <!--
+        Most controllers will use the ControllerClassNameHandlerMapping above, but
+        for the index controller we are using ParameterizableViewController, so we must
+        define an explicit mapping for it.
+    -->
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="index.htm">indexController</prop>
+                <prop key="listDampers.htm">listDamperController</prop>
+                <prop key="confirmTestCycle.htm">confirmTestCycleController</prop>
+                <prop key="editDamper.htm">editDamperController</prop>
+                <prop key="editDamperArchive.htm">editDamperArchiveController</prop>
+                <prop key="deleteDamper.htm">deleteDamperController</prop>
+                <prop key="selectDamperType.htm">selectDamperTypeController</prop>
+                <prop key="damper.htm">damperController</prop>
+
+                <!-- Client Controllers -->
+                <!--prop key="/client.htm">clientFormController</prop-->
+                <prop key="/client.htm">clientController</prop>
+                <prop key="/listclient.htm">listClientController</prop>
+                <prop key="/editclient.htm">editClientController</prop>
+                <prop key="/listbuilding.htm">listBuildingFormController</prop>
+                <prop key="/editbuilding.htm">editBuildingFormController</prop>
+                <prop key="/listuser.htm">listUserController</prop>
+                <prop key="/edituser.htm">listUserController</prop>
+                <prop key="/editfloor.htm">editFloorController</prop>
+                <prop key="/deleteClient.htm">deleteClientController</prop>
+                <prop key="/deleteBuilding.htm">deleteBuildingController</prop>
+                <prop key="/deleteFloor.htm">deleteFloorController</prop>
+                <prop key="/deletePicture.htm">deletePictureController</prop>
+
+                <prop key="/listRepairHistoryFromIndex.htm">listRepairHistoryFromIndexController</prop>
+                <prop key="/listRepairHistoryFromDamperList.htm">listRepairHistoryFromDamperListController</prop>
+                <prop key="/editRepairHistoryFromDamper.htm">editRepairHistoryFromDamperController</prop>
+                <prop key="/editRepairHistoryFromRepairHistoryList.htm">editRepairHistoryFromRepairHistoryListController</prop>
+                <prop key="/deleteRepairHistory.htm">deleteRepairHistoryController</prop>
+
+                <prop key="/nextTestDate.htm">nextTestDateController</prop>
+                <prop key="/passFail.htm">passFailController</prop>
+                <prop key="/passFailPieChart.htm">passFailPieChartController</prop>
+                <prop key="/passFailByBuilding.htm">passFailByBuildingController</prop>
+                <prop key="/search.htm">searchController</prop>
+                <prop key="/searchDamper.htm">searchDamperController</prop>
+                <prop key="/utilities.htm">utilitiesController</prop>
+                <prop key="/success.htm">successController</prop>
+                <prop key="/error.htm">errorController</prop>
+                <prop key="/generateReport.htm">generateReportController</prop>
+                <prop key="/repair.htm">repairController</prop>
+                <prop key="/listRepairHistory.htm">listRepairHistoryController</prop>
+
+                <prop key="/editSite.htm">editSiteController</prop>
+                <prop key="/deleteSite.htm">deleteSiteController</prop>
+                <prop key="/testEmail.htm">testEmailController</prop>
+                <prop key="/newTestCycle.htm">newTestCycleController</prop>
+                <prop key="/decommissionDamper.htm">decommissionDamperController</prop>
+
+                <prop key="/editTestCycle.htm">editTestCycleController</prop>
+
+                <prop key="/reports.htm">reportsController</prop>
+                <prop key="/pictures.htm">picturesController</prop>
+
+                <!--<prop key="/customerutils.htm">customerutilsController</prop>-->
+
+                <prop key="/editDrawing.htm">editDrawingController</prop>
+                
+                <prop key="/hinchcliffe.htm">hinchcliffeController</prop>
+
+
+
+            </props>
+        </property>
+    </bean>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="5000000"/>
+    </bean>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp" />
+
+    <bean name="reportsController" class="com.thermalstrategies.eportal.controller.ReportsController" />
+
+    <bean name="picturesController" class="com.thermalstrategies.eportal.controller.PicturesController" >
+        <constructor-arg index="0" ref="tstratDamperSession" />
+    </bean>
+
+    <bean name="deletePictureController" class="com.thermalstrategies.eportal.controller.DeletePictureController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean name="customerutilsController" class="com.thermalstrategies.eportal.controller.CustomerUtilsController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean name="editTestCycleController" class="com.thermalstrategies.eportal.controller.EditTestCycleController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean name="search" class="com.thermalstrategies.eportal.search.Search" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean name="searchController" class="com.thermalstrategies.eportal.controller.SearchController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+        <constructor-arg index="1">
+            <ref bean="search" />
+        </constructor-arg>
+    </bean>
+
+    <bean name="repairController" class="com.thermalstrategies.eportal.controller.RepairController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean name="decommissionDamperController" class="com.thermalstrategies.eportal.controller.DecommissionDamperController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean name="testEmailController" class="com.thermalstrategies.eportal.controller.TestEmailController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean name="indexController" class="com.thermalstrategies.eportal.IndexController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="editSiteController" class="com.thermalstrategies.eportal.controller.EditSiteController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="deleteSiteController" class="com.thermalstrategies.eportal.controller.DeleteSiteController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="damperController" class="com.thermalstrategies.eportal.controller.DamperController" >
+        <constructor-arg index="0" ref="tstratDamperSession" />
+    </bean>
+
+    <bean id="listDamperController" class="com.thermalstrategies.eportal.controller.ListDamperController" >
+        <constructor-arg index="0" ref="tstratDamperSession" />
+        <constructor-arg index="1" ref="tstratDamperDataSource" />
+    </bean>
+
+    <bean id="damperValidator" class="com.thermalstrategies.eportal.controller.DamperValidator"/>
+    <bean id="editDamperArchiveController" class="com.thermalstrategies.eportal.controller.EditDamperArchiveController" >
+        <constructor-arg index="0" ref="tstratDamperSession" />
+        <constructor-arg index="1" ref="tstratDamperDataSource" />
+    </bean>
+    <bean id="editDamperController" class="com.thermalstrategies.eportal.controller.EditDamperController" >
+        <constructor-arg index="0" ref="tstratDamperSession" />
+        <constructor-arg index="1" ref="tstratDamperDataSource" />
+        <property name="validator">
+            <ref bean="damperValidator"/>
+        </property>
+    </bean>
+
+    <bean id="deleteDamperController" class="com.thermalstrategies.eportal.controller.DeleteDamperController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="damperTypeValidator" class="com.thermalstrategies.eportal.controller.SelectDamperTypeValidator" />
+    <bean id="selectDamperTypeController" class="com.thermalstrategies.eportal.controller.SelectDamperTypeController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+        <property name="validator">
+            <ref bean="damperTypeValidator"/>
+        </property>
+    </bean>
+
+    <bean id="generateReportValidator" class="com.thermalstrategies.eportal.controller.GenerateReportValidator" />
+    <bean id="generateReportController" class="com.thermalstrategies.eportal.controller.GenerateReportController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+        <property name="validator">
+            <ref bean="generateReportValidator"/>
+        </property>
+    </bean>
+
+    <bean id="listRepairHistoryController" class="com.thermalstrategies.eportal.controller.ListRepairHistoryController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+
+    </bean>
+
+    <bean id="listRepairHistoryFromIndexController" class="com.thermalstrategies.eportal.controller.ListRepairHistoryFromIndexController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+
+    </bean>
+
+    <bean id="listRepairHistoryFromDamperListController" class="com.thermalstrategies.eportal.controller.ListRepairHistoryFromDamperListController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="editRepairHistoryFromDamperController" class="com.thermalstrategies.eportal.controller.EditRepairHistoryFromDamper" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="editRepairHistoryFromRepairHistoryListController" class="com.thermalstrategies.eportal.controller.EditRepairHistoryFromRepairHistoryList" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="deleteRepairHistoryController" class="com.thermalstrategies.eportal.controller.DeleteRepairHistoryController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="nextTestDateController" class="com.thermalstrategies.eportal.controller.NextTestDateController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="listUserController" class="com.thermalstrategies.eportal.controller.ListUserController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+    
+    <bean id="confirmTestCycleController" class="com.thermalstrategies.eportal.controller.ConfirmTestCycleController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+    
+    
+
+    <bean id="userValidator" class="com.thermalstrategies.eportal.controller.EditUserValidator" />
+    <bean id="editUserController" class="com.thermalstrategies.eportal.controller.EditUserController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+        <property name="validator">
+            <ref bean="userValidator"/>
+        </property>
+    </bean>
+
+    <bean id="passFailController" class="com.thermalstrategies.eportal.controller.PassFailController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="passFailByBuildingController" class="com.thermalstrategies.eportal.controller.PassFailByBuildingController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="passFailPieChartController" class="com.thermalstrategies.eportal.controller.PassFailPieChartController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="searchDamperController" class="com.thermalstrategies.eportal.controller.SearchDamperController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="utilitiesController" class="com.thermalstrategies.eportal.controller.UtilitiesController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+    <bean id="successController" class="com.thermalstrategies.eportal.controller.SuccessController">
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+    <bean id="errorController" class="com.thermalstrategies.eportal.controller.ErrorController">
+    </bean>
+
+    <bean id="newTestCycleController" class="com.thermalstrategies.eportal.controller.NewTestCycleController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="editDrawingController" class="com.thermalstrategies.eportal.controller.EditDrawingController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+    
+    <bean id="hinchcliffeController" class="com.thermalstrategies.eportal.controller.HinchcliffeController" >
+        <constructor-arg index="0">
+            <ref bean="applicationManager" />
+        </constructor-arg>
+    </bean>
+
+
+</beans>

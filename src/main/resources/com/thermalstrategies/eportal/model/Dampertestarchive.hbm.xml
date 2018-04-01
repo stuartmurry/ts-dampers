@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 9, 2014 11:31:45 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.thermalstrategies.eportal.model.Dampertestarchive" table="dampertestarchive" catalog="tstrat_damper" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="increment" />
+        </id>
+        <property name="aliasId" type="string">
+            <column name="alias_id" length="100" />
+        </property>
+        <property name="buildingId" type="java.lang.Integer">
+            <column name="building_id" />
+        </property>
+        <property name="typeId" type="java.lang.Integer">
+            <column name="type_id" />
+        </property>
+        <property name="sizel" type="java.lang.Integer">
+            <column name="sizel" />
+        </property>
+        <property name="sizew" type="java.lang.Integer">
+            <column name="sizew" />
+        </property>
+        <property name="system" type="string">
+            <column name="system" length="50" />
+        </property>
+        <property name="systemtype" type="string">
+            <column name="systemtype" length="100" />
+        </property>
+        <property name="materialId" type="java.lang.Integer">
+            <column name="material_id" />
+        </property>
+        <property name="floorId" type="java.lang.Integer">
+            <column name="floor_id" />
+        </property>
+        <property name="statusId" type="java.lang.Integer">
+            <column name="status_id" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" />
+        </property>
+        <property name="sublocation" type="string">
+            <column name="sublocation" />
+        </property>
+        <property name="dampernumber" type="java.lang.Integer">
+            <column name="dampernumber" />
+        </property>
+        <property name="series" type="java.lang.Integer">
+            <column name="series" />
+        </property>
+        <property name="dateTestedTs" type="date">
+            <column name="date_tested_ts" length="10" />
+        </property>
+        <property name="repairDate" type="date">
+            <column name="repair_date" length="10" />
+        </property>
+        <property name="comments" type="string">
+            <column name="comments" length="16777215" />
+        </property>
+        <property name="tester" type="java.lang.Integer">
+            <column name="tester" />
+        </property>
+        <property name="isenabled" type="boolean">
+            <column name="isenabled" not-null="true" />
+        </property>
+        <property name="customerId" type="java.lang.Integer">
+            <column name="customer_id" />
+        </property>
+        <property name="nextTestDate" type="date">
+            <column name="next_test_date" length="10" />
+        </property>
+        <property name="occupancy" type="string">
+            <column name="occupancy" length="50" />
+        </property>
+        <property name="specialProcedures" type="string">
+            <column name="special_procedures" length="16777215" />
+        </property>
+        <property name="xposition" type="java.lang.Integer">
+            <column name="xposition" />
+        </property>
+        <property name="yposition" type="java.lang.Integer">
+            <column name="yposition" />
+        </property>
+        <property name="dampertestId" type="java.lang.Integer">
+            <column name="dampertest_id" />
+        </property>
+    </class>
+</hibernate-mapping>

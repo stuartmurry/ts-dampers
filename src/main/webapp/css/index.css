@@ -1,0 +1,10 @@
+/* Progess bar widget, by Matthew Harvey (matt at smallish.com) */
+/* Licensed under a Creative Commons Attribution-Share Alike 2.5 License (http://creativecommons.org/licenses/by-sa/2.5/) */
+
+div.smallish-progress-wrapper {
+    /* Don't change the following lines. */
+    position: relative; border: 1px solid black; }
+div.smallish-progress-bar { /* Don't change the following lines. */ position: absolute; top: 0; left: 0; height: 100%; }
+div.smallish-progress-text { /* Don't change the following lines. */ text-align: center; position: relative; /* Add your customizations after this line. */ }
+
+

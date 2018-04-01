@@ -1,0 +1,39 @@
+body {
+    font-family: "lucida grande", verdana, sans-serif;
+    font-size:9pt;
+    /*background-image: url('../images/login-bkgrnd.jpg');*/
+    /*background-repeat:repeat;*/
+}
+
+.button {
+    border: 1px solid #006;
+    background: #9cf;
+}
+
+.allcaps {
+    text-transform: uppercase
+}
+
+table {
+    background:white;
+
+}
+
+.error {
+    color:red;
+}
+
+h1 {
+    color: #4d4141;
+}
+
+table tr td {
+    color: #4d4141
+}
+form input, textarea, select {
+    color: #4d4141;
+    background: white;
+    border: 1px solid #18658c
+}
+
+
